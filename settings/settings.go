@@ -9,7 +9,9 @@ import (
 type Config struct {
 	Port string	  `mapstructure:"port"`
 	*MySQLConfig  `mapstructure:"mysql"`
+	*RedisConfig  `mapstructure:"redis"`
 }
+
 
 type MySQLConfig struct {
 	Host         string `mapstructure:"host"`
@@ -19,6 +21,14 @@ type MySQLConfig struct {
 	Port         int    `mapstructure:"port"`
 	MaxOpenConns int    `mapstructure:"max_open_conns"`
 	MaxIdleConns int    `mapstructure:"max_idle_conns"`
+}
+
+type RedisConfig struct {
+	Host         string `mapstructure:"host"`
+	User         string `mapstructure:"user"`
+	Password     string `mapstructure:"password"`
+	DB           string `mapstructure:"db"`
+	Port         int    `mapstructure:"port"`
 }
 
 var Conf = new(Config)

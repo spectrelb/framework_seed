@@ -25,3 +25,12 @@ func Init(cfg *settings.MySQLConfig) error {
 
 	return nil
 }
+
+type User struct {
+
+}
+
+func main()  {
+	Init(settings.Conf.MySQLConfig)
+	db.Select()
+}
