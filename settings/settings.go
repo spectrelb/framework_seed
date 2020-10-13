@@ -7,11 +7,20 @@ import (
 )
 
 type Config struct {
-	Port string	  `mapstructure:"port"`
-	*MySQLConfig  `mapstructure:"mysql"`
-	*RedisConfig  `mapstructure:"redis"`
+	Mode         string `mapstructure:"mode"`
+	Port         string `mapstructure:"port"`
+	*LogConfig   `mapstructure:"log"`
+	*MySQLConfig `mapstructure:"mysql"`
+	*RedisConfig `mapstructure:"redis"`
 }
 
+type LogConfig struct {
+	Level      string `mapstructure:"level"`
+	Filename   string `mapstructure:"filename"`
+	MaxSize    int    `mapstructure:"max_size"`
+	MaxAge     int    `mapstructure:"max_age"`
+	MaxBackups int    `mapstructure:"max_backups"`
+}
 
 type MySQLConfig struct {
 	Host         string `mapstructure:"host"`
@@ -24,19 +33,19 @@ type MySQLConfig struct {
 }
 
 type RedisConfig struct {
-	Host         string `mapstructure:"host"`
-	User         string `mapstructure:"user"`
-	Password     string `mapstructure:"password"`
-	DB           string `mapstructure:"db"`
-	Port         int    `mapstructure:"port"`
+	Host     string `mapstructure:"host"`
+	User     string `mapstructure:"user"`
+	Password string `mapstructure:"password"`
+	DB       string `mapstructure:"db"`
+	Port     int    `mapstructure:"port"`
 }
 
 var Conf = new(Config)
 
 func Init() error {
 	viper.SetConfigFile("./config/config.yaml")
-	err := viper.ReadInConfig()               // 读取配置信息
-	if err != nil {                           // 读取配置信息失败
+	err := viper.ReadInConfig() // 读取配置信息
+	if err != nil {             // 读取配置信息失败
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
