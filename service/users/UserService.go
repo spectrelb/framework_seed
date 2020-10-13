@@ -1,1 +1,5 @@
 package users
+
+func Register() {
+
+}
