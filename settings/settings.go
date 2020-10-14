@@ -34,10 +34,9 @@ type MySQLConfig struct {
 
 type RedisConfig struct {
 	Host     string `mapstructure:"host"`
-	User     string `mapstructure:"user"`
 	Password string `mapstructure:"password"`
-	DB       string `mapstructure:"db"`
-	Port     int    `mapstructure:"port"`
+	Port     string    `mapstructure:"port"`
+	DB       int    `mapstructure:"db"`
 }
 
 var Conf = new(Config)

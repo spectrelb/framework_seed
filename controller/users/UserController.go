@@ -2,25 +2,20 @@ package users
 
 import (
 	"framework_seed/models/req/users"
+	"framework_seed/pkg/Response"
+	"framework_seed/service/users"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func Register(c *gin.Context)  {
-	c.JSON(200, gin.H{
-		"message": "hello world",
-	})
+func Register(c *gin.Context) {
+	Response.Success(c)
 }
 
-func Login(c *gin.Context)  {
+func Login(c *gin.Context) {
 	var loginReq users.LoginReq
 	if err := c.ShouldBindJSON(&loginReq); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": err.Error(),
-		})
+		Response.Error(c, Response.CodeServerBusy)
 		return
 	}
-	c.JSON(200, gin.H{
-		"message": loginReq,
-	})
+	service.Login(c, &loginReq)
 }

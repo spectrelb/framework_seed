@@ -13,7 +13,7 @@ func InitRoutes() (r *gin.Engine) {
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
 
 	r.GET("/hello", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"message": "hello world",
 		})
 	})
